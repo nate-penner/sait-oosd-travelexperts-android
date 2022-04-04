@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TravelExperts">
         <activity
+            android:name=".BookingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProductsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PackagesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomersActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
