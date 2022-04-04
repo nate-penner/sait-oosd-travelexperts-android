@@ -11,6 +11,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
+import oosd.sait.travelexperts.data.DBHelper;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override

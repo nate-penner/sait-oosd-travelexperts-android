@@ -21,4 +21,43 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etProductId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Product ID:"
+        app:layout_constraintBottom_toTopOf="@+id/etProductId"
+        app:layout_constraintStart_toStartOf="@+id/etProductId" />
+
+    <Button
+        android:id="@+id/btnFindProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find"
+        app:layout_constraintEnd_toEndOf="@+id/etProductId"
+        app:layout_constraintStart_toStartOf="@+id/etProductId"
+        app:layout_constraintTop_toBottomOf="@+id/etProductId" />
+
+    <TextView
+        android:id="@+id/tvProductName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/etProductId"
+        app:layout_constraintStart_toStartOf="@+id/etProductId"
+        app:layout_constraintTop_toBottomOf="@+id/btnFindProduct" />
 </androidx.constraintlayout.widget.ConstraintLayout>
