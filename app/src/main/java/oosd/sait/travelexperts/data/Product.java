@@ -1,5 +1,7 @@
 package oosd.sait.travelexperts.data;
 
+import androidx.annotation.NonNull;
+
 public class Product {
     private int productId;
     private String productName;
@@ -23,5 +25,11 @@ public class Product {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return productName;
     }
 }

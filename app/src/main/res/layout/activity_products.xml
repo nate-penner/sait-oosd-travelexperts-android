@@ -22,42 +22,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/etProductId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ListView
+        android:id="@+id/lvProducts"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddProduct"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Product ID:"
-        app:layout_constraintBottom_toTopOf="@+id/etProductId"
-        app:layout_constraintStart_toStartOf="@+id/etProductId" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/btnFindProduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Find"
-        app:layout_constraintEnd_toEndOf="@+id/etProductId"
-        app:layout_constraintStart_toStartOf="@+id/etProductId"
-        app:layout_constraintTop_toBottomOf="@+id/etProductId" />
-
-    <TextView
-        android:id="@+id/tvProductName"
+        android:id="@+id/btnAddProduct"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/etProductId"
-        app:layout_constraintStart_toStartOf="@+id/etProductId"
-        app:layout_constraintTop_toBottomOf="@+id/btnFindProduct" />
+        android:layout_marginBottom="32dp"
+        android:paddingVertical="20dp"
+        android:text="Add Product"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/lvProducts"
+        app:layout_constraintStart_toStartOf="@+id/lvProducts" />
 </androidx.constraintlayout.widget.ConstraintLayout>
