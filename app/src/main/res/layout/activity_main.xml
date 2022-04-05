@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnCustomers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
@@ -31,7 +31,7 @@
             android:text="Customers" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btnPackages"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
@@ -39,7 +39,7 @@
             android:text="packages" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btnProducts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
@@ -47,7 +47,7 @@
             android:text="Products" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/btnBookings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
