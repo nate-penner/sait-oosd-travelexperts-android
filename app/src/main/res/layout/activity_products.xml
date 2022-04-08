@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/lvProducts"
+        android:id="@+id/lvCustomers"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -45,6 +45,6 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/lvProducts"
-        app:layout_constraintStart_toStartOf="@+id/lvProducts" />
+        app:layout_constraintEnd_toEndOf="@+id/lvCustomers"
+        app:layout_constraintStart_toStartOf="@+id/lvCustomers" />
 </androidx.constraintlayout.widget.ConstraintLayout>
