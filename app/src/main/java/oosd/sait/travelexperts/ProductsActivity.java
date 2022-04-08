@@ -8,9 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import oosd.sait.travelexperts.data.DataSource;
 import oosd.sait.travelexperts.data.Product;
@@ -36,7 +34,7 @@ public class ProductsActivity extends AppCompatActivity {
         instance = this;
         ds = new ProductManager(getApplicationContext());
 
-        lvProducts = findViewById(R.id.lvProducts);
+        lvProducts = findViewById(R.id.lvCustomers);
         btnAddProduct = findViewById(R.id.btnAddProduct);
 
         adapter = new ArrayAdapter<Product>(this, android.R.layout.simple_list_item_1);
