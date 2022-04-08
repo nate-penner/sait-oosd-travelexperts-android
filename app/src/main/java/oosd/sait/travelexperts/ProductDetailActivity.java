@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.MessageFormat;
+
 import oosd.sait.travelexperts.data.DataSource;
 import oosd.sait.travelexperts.data.Product;
 import oosd.sait.travelexperts.data.ProductManager;
@@ -55,6 +57,45 @@ public class ProductDetailActivity extends AppCompatActivity {
                             finish();
                         });
 
+                    }).start();
+                }
+            });
+        } else {
+            int productId = getIntent().getIntExtra("productId", 0);
+
+            Product product = ds.getById(productId);
+
+            tvHeader.setText(MessageFormat.format("Product - {0}", product.getProductName()));
+            etProductId.setText(MessageFormat.format("{0}", product.getProductId()));
+            etProductName.setText(product.getProductName());
+
+            btnSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    product.setProductName(etProductName.getText().toString());
+
+                    new Thread(() -> {
+                        int result = ds.update(product);
+
+                        runOnUiThread(() -> {
+                            ProductsActivity.getInstance().loadProducts();
+                            Toast.makeText(ProductsActivity.getInstance(), "Product saved.", Toast.LENGTH_LONG).show();
+                            finish();
+                        });
+                    }).start();
+                }
+            });
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new Thread(() -> {
+                        int result = ds.delete(product);
+
+                        runOnUiThread(() -> {
+                            ProductsActivity.getInstance().loadProducts();
+                            Toast.makeText(ProductsActivity.getInstance(), "Product deleted.", Toast.LENGTH_LONG).show();
+                            finish();
+                        });
                     }).start();
                 }
             });

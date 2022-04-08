@@ -34,12 +34,18 @@ public class ProductManager extends DataSource<Product, Integer> {
 
     @Override
     public int update(Product data) {
-        return 0;
+        String[] args = { data.getProductId()+"" };
+        ContentValues values = new ContentValues();
+        values.put("ProdName", data.getProductName());
+
+        return db.update("Products", values, "ProductId=?", args);
     }
 
     @Override
     public int delete(Product data) {
-        return 0;
+        String[] args = { data.getProductId() + "" };
+
+        return db.delete("Products", "ProductId=?", args);
     }
 
     @Override
