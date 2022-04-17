@@ -13,6 +13,7 @@ import android.widget.ListView;
 import oosd.sait.travelexperts.data.DataSource;
 import oosd.sait.travelexperts.data.Product;
 import oosd.sait.travelexperts.data.ProductManager;
+import oosd.sait.travelexperts.data.ProductResource;
 
 public class ProductsActivity extends AppCompatActivity {
     ListView lvProducts;
@@ -32,7 +33,7 @@ public class ProductsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_products);
 
         instance = this;
-        ds = new ProductManager(getApplicationContext());
+        ds = new ProductResource(getApplicationContext());
 
         lvProducts = findViewById(R.id.lvCustomers);
         btnAddProduct = findViewById(R.id.btnAddProduct);
@@ -64,6 +65,18 @@ public class ProductsActivity extends AppCompatActivity {
 
     public void loadProducts() {
         adapter.clear();
-        ds.getList().forEach(p -> adapter.add(p));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ds.getList().forEach(p -> {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter.add(p);
+                        }
+                    });
+                });
+            }
+        }).start();
     }
 }
