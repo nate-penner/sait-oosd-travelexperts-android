@@ -4,12 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.Collection;
+import java.util.List;
+
+import oosd.sait.travelexperts.data.API;
 import oosd.sait.travelexperts.data.DataSource;
 import oosd.sait.travelexperts.data.Product;
 import oosd.sait.travelexperts.data.ProductManager;
@@ -33,6 +38,7 @@ public class ProductsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_products);
 
         instance = this;
+
         ds = new ProductResource(getApplicationContext());
 
         lvProducts = findViewById(R.id.lvCustomers);
@@ -68,13 +74,13 @@ public class ProductsActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                ds.getList().forEach(p -> {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            adapter.add(p);
-                        }
-                    });
+                Collection<Product> productList = ds.getList();
+                Log.d("nate", "got a product list of length " + productList.size());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        productList.forEach(adapter::add);
+                    }
                 });
             }
         }).start();

@@ -11,6 +11,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
+import oosd.sait.travelexperts.data.API;
 import oosd.sait.travelexperts.data.DBHelper;
 
 public class SplashActivity extends AppCompatActivity {
@@ -19,6 +20,11 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        API.map("products", "http://10.0.2.2:8080/Group5_REST_service_war_exploded/api/product");
+        API.map("packages", "http://10.0.2.2:8080/Group5_REST_service_war_exploded/api/package");
+        API.map("bookings", "http://10.0.2.2:8080/Group5_REST_service_war_exploded/api/booking");
+        API.map("customers", "http://10.0.2.2:8080/Group5_REST_service_war_exploded/api/customer");
 
         new Handler().postDelayed(new Runnable() {
             @Override
