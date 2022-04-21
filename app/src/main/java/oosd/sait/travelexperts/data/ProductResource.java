@@ -76,11 +76,42 @@ public class ProductResource extends DataSource<Product, Integer> {
 
     @Override
     public int update(Product data) {
+        APIRequest request = new APIRequest(
+                API.get("products"),
+                "/update",
+                "POST",
+                "application/json",
+                "application/json"
+        );
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("productId", data.getProductId());
+            obj.put("prodName", data.getProductName());
+            JSONObject response = new JSONObject(request.send(obj.toString()));
+            Log.d("nate6", response.getString("message"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return 0;
     }
 
     @Override
     public int delete(Product data) {
+        APIRequest request = new APIRequest(
+                API.get("products"),
+                "/delete/"+data.getProductId(),
+                "DELETE",
+                "application/json",
+                "application/json"
+        );
+
+        try {
+            JSONObject response = new JSONObject(request.send());
+            return response.getInt("rowsAffected");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 

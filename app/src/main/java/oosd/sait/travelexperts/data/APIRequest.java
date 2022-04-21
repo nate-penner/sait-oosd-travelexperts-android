@@ -1,5 +1,7 @@
 package oosd.sait.travelexperts.data;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -61,8 +63,13 @@ public class APIRequest {
                 response = buffer.toString();
             }
         } catch (MalformedURLException e) {
+            Log.d("nate6", e.getMessage());
             e.printStackTrace();
         } catch (IOException e) {
+            Log.d("nate6", e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            Log.d("nate6", e.getMessage());
             e.printStackTrace();
         }
 
