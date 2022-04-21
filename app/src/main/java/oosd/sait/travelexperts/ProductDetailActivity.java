@@ -100,7 +100,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
                                         runOnUiThread(() -> {
                                             ProductsActivity.getInstance().loadProducts();
-                                            Toast.makeText(ProductsActivity.getInstance(), "Product deleted.", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(ProductsActivity.getInstance(), result > 0 ? "Product deleted." : "Product is in use by a package. Not deleted.", Toast.LENGTH_LONG).show();
                                             finish();
                                         });
                                     }).start();
