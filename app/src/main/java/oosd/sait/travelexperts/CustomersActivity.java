@@ -22,7 +22,7 @@ public class CustomersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customers);
 
-        lvCustomers = findViewById(R.id.lvCustomers);
+        lvCustomers = findViewById(R.id.lvPackages);
         btnAddCustomer = findViewById(R.id.btnAddCustomer);
 
         ds = new CustomerManager(this);

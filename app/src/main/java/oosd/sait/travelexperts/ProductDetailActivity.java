@@ -14,7 +14,6 @@ import java.text.MessageFormat;
 
 import oosd.sait.travelexperts.data.DataSource;
 import oosd.sait.travelexperts.data.Product;
-import oosd.sait.travelexperts.data.ProductManager;
 import oosd.sait.travelexperts.data.ProductResource;
 
 public class ProductDetailActivity extends AppCompatActivity {
@@ -27,8 +26,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_detail);
 
         tvHeader = findViewById(R.id.tvHeader);
-        etProductId = findViewById(R.id.etProductId);
-        etProductName = findViewById(R.id.etProductName);
+        etProductId = findViewById(R.id.etBasePrice);
+        etProductName = findViewById(R.id.etAgencyCommission);
         btnSave = findViewById(R.id.btnSave);
         btnDelete = findViewById(R.id.btnDelete);
 

@@ -23,20 +23,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/lvCustomers"
+        android:id="@+id/lvPackages"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddProduct"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddPackage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/btnAddProduct"
+        android:id="@+id/btnAddPackage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
@@ -45,6 +45,6 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/lvCustomers"
-        app:layout_constraintStart_toStartOf="@+id/lvCustomers" />
+        app:layout_constraintEnd_toEndOf="@+id/lvPackages"
+        app:layout_constraintStart_toStartOf="@+id/lvPackages" />
 </androidx.constraintlayout.widget.ConstraintLayout>

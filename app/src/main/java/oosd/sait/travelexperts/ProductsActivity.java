@@ -12,12 +12,9 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.Collection;
-import java.util.List;
 
-import oosd.sait.travelexperts.data.API;
 import oosd.sait.travelexperts.data.DataSource;
 import oosd.sait.travelexperts.data.Product;
-import oosd.sait.travelexperts.data.ProductManager;
 import oosd.sait.travelexperts.data.ProductResource;
 
 public class ProductsActivity extends AppCompatActivity {
@@ -41,8 +38,8 @@ public class ProductsActivity extends AppCompatActivity {
 
         ds = new ProductResource(getApplicationContext());
 
-        lvProducts = findViewById(R.id.lvCustomers);
-        btnAddProduct = findViewById(R.id.btnAddProduct);
+        lvProducts = findViewById(R.id.lvPackages);
+        btnAddProduct = findViewById(R.id.btnAddPackage);
 
         adapter = new ArrayAdapter<Product>(this, android.R.layout.simple_list_item_1);
         lvProducts.setAdapter(adapter);
