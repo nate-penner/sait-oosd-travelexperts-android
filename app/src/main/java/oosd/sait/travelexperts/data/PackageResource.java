@@ -84,8 +84,8 @@ public class PackageResource extends DataSource<Package, Integer> {
                 Package p = new Package(
                         pkg.getInt("packageId"),
                         pkg.getString("pkgName"),
-                        Timestamp.valueOf(pkg.getString("pkgStartDate")),
-                        Timestamp.valueOf(pkg.getString("pkgEndDate")),
+                        Timestamp.valueOf(pkg.getString("pkgStartDate")).toString(),
+                        Timestamp.valueOf(pkg.getString("pkgEndDate")).toString(),
                         pkg.getString("pkgDesc"),
                         pkg.getDouble("pkgBasePrice"),
                         pkg.getDouble("pkgAgencyCommission")

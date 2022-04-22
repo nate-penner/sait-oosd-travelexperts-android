@@ -27,11 +27,18 @@ public class PackagesActivity extends AppCompatActivity {
     Button btnAddPackage;
     ArrayAdapter<Package> adapter;
     DataSource<Package, Integer> dataSource;
+    static PackagesActivity instance;
+
+    public static PackagesActivity getInstance() {
+        return instance;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_packages);
+
+        instance = this;
 
         lvPackages = findViewById(R.id.lvPackages);
         btnAddPackage = findViewById(R.id.btnAddPackage);

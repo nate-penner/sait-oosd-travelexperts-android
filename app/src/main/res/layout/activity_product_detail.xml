@@ -31,22 +31,22 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toTopOf="@+id/txtBasePrice" />
+        app:layout_constraintTop_toTopOf="@+id/etBasePrice" />
 
     <EditText
-        android:id="@+id/txtBasePrice"
+        android:id="@+id/etBasePrice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:editable="false"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/txtAgencyCommission"
+        app:layout_constraintBottom_toTopOf="@+id/etAgencyCommission"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="@+id/txtAgencyCommission" />
+        app:layout_constraintStart_toStartOf="@+id/etAgencyCommission" />
 
     <EditText
-        android:id="@+id/txtAgencyCommission"
+        android:id="@+id/etAgencyCommission"
         android:layout_width="0dp"
         android:layout_height="46dp"
         android:layout_marginStart="16dp"
@@ -100,6 +100,6 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
-        app:layout_constraintTop_toTopOf="@+id/txtAgencyCommission" />
+        app:layout_constraintTop_toTopOf="@+id/etAgencyCommission" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

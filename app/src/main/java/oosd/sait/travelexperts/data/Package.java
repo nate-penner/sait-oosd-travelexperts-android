@@ -7,12 +7,12 @@ import java.util.Date;
 public class Package {
     private int id;
     private String name;
-    private Date startDate, endDate;
+    private String startDate, endDate;
     private String description;
     private double basePrice;
     private double agencyCommission;
 
-    public Package(int id, String name, Date startDate, Date endDate, String description, double basePrice, double agencyCommission) {
+    public Package(int id, String name, String startDate, String endDate, String description, double basePrice, double agencyCommission) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -38,19 +38,19 @@ public class Package {
         this.name = name;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

@@ -26,8 +26,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_detail);
 
         tvHeader = findViewById(R.id.tvHeader);
-        etProductId = findViewById(R.id.txtBasePrice);
-        etProductName = findViewById(R.id.txtAgencyCommission);
+        etProductId = findViewById(R.id.etBasePrice);
+        etProductName = findViewById(R.id.etAgencyCommission);
         btnSave = findViewById(R.id.btnSave);
         btnDelete = findViewById(R.id.btnDelete);
 
