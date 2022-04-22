@@ -45,6 +45,33 @@ public class PackageResource extends DataSource<Package, Integer> {
 
     @Override
     public Package getById(Integer id) {
+        APIRequest request = new APIRequest(
+                API.get("packages"),
+                "/get/"+id,
+                "GET",
+                "application/json",
+                "application/json"
+        );
+
+        String response = request.send();
+
+        try {
+            JSONObject data = new JSONObject(response);
+
+            return new Package(
+                    data.getInt("packageId"),
+                    data.getString("pkgName"),
+                    Timestamp.valueOf(data.getString("pkgStartDate")).toString(),
+                    Timestamp.valueOf(data.getString("pkgEndDate")).toString(),
+                    data.getString("pkgDesc"),
+                    data.getDouble("pkgBasePrice"),
+                    data.getDouble("pkgAgencyCommission")
+            );
+        } catch (JSONException e) {
+            Log.d("nate", "json exception: " + e.getMessage());
+            e.printStackTrace();
+        }
+
         return null;
     }
 

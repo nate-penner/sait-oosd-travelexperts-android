@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.Timestamp;
+import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -97,7 +98,26 @@ public class PackageDetailActivity extends AppCompatActivity {
             });
         } else {
             // Edit a package
+            int packageId = getIntent().getIntExtra("packageId", 0);
 
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    pkg = dataSource.getById(packageId);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tvHeader.setText(MessageFormat.format("Package - {0}", pkg.getName()));
+                            etId.setText(pkg.getId()+"");
+                            etName.setText(pkg.getName());
+                            etDescription.setText(pkg.getDescription());
+                            etBasePrice.setText(pkg.getBasePrice()+"");
+                            etAgencyCommission.setText(pkg.getAgencyCommission()+"");
+                        }
+                    });
+                }
+            }).start();
         }
     }
 
