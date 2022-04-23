@@ -14,8 +14,8 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".PackageDetailActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustNothing" />
+            android:exported="false" />
+<!--            android:windowSoftInputMode="adjustNothing" />-->
         <activity
             android:name=".ProductDetailActivity"
             android:exported="false"

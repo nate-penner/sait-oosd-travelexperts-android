@@ -77,6 +77,30 @@ public class PackageResource extends DataSource<Package, Integer> {
 
     @Override
     public int update(Package data) {
+        APIRequest request = new APIRequest(
+                API.get("packages"),
+                "/update",
+                "POST",
+                "application/json",
+                "application/json"
+        );
+
+        JSONObject pkgData = new JSONObject();
+        try {
+            pkgData.put("packageId", data.getId());
+            pkgData.put("pkgName", data.getName());
+            pkgData.put("pkgStartDate", data.getStartDate());
+            pkgData.put("pkgEndDate", data.getEndDate());
+            pkgData.put("pkgDesc", data.getDescription());
+            pkgData.put("pkgBasePrice", data.getBasePrice());
+            pkgData.put("pkgAgencyCommission", data.getAgencyCommission());
+            JSONObject response = new JSONObject(request.send(pkgData.toString()));
+            if (response.getString("message").equalsIgnoreCase("success"))
+                return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return 0;
     }
 
@@ -87,6 +111,27 @@ public class PackageResource extends DataSource<Package, Integer> {
 
     @Override
     public int deleteById(Integer id) {
+        APIRequest request = new APIRequest(
+                API.get("packages"),
+                "/delete/"+id,
+                "DELETE",
+                "application/json",
+                "application/json"
+        );
+
+        String data = request.send();
+
+        Log.d("nate", "response received: " + data);
+
+        try {
+            JSONObject response = new JSONObject(data);
+            Log.d("nate", "message: " + response.getString("message"));
+            if (response.getString("message").equalsIgnoreCase("success"))
+                return 1;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return 0;
     }
 

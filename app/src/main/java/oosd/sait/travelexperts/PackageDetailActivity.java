@@ -15,6 +15,9 @@ import android.widget.Toast;
 
 import java.sql.Timestamp;
 import java.text.MessageFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -100,6 +103,65 @@ public class PackageDetailActivity extends AppCompatActivity {
             // Edit a package
             int packageId = getIntent().getIntExtra("packageId", 0);
 
+            btnSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    saveForm();
+
+                    // TODO: Get products list from the products suppliers activity
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            int result = dataSource.update(pkg);
+                            Log.d("nate", "result: " + result);
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (result == 1) {
+                                        PackagesActivity.getInstance().loadPackages();
+                                        Toast.makeText(PackagesActivity.getInstance(), "Package updated.",
+                                                Toast.LENGTH_LONG).show();
+                                        finish();
+                                    } else {
+                                        Toast.makeText(PackagesActivity.getInstance(), "Package update failed.",
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                        }
+                    }).start();
+                }
+            });
+
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            int result = dataSource.deleteById(packageId);
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (result == 1) {
+                                        PackagesActivity.getInstance().loadPackages();
+                                        Toast.makeText(PackagesActivity.getInstance(), "Package deleted.",
+                                                Toast.LENGTH_LONG).show();
+                                        finish();
+                                    } else {
+                                        Toast.makeText(PackagesActivity.getInstance(), "Package failed to delete.",
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                        }
+                    }).start();
+                }
+            });
+
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -112,6 +174,8 @@ public class PackageDetailActivity extends AppCompatActivity {
                             etId.setText(pkg.getId()+"");
                             etName.setText(pkg.getName());
                             etDescription.setText(pkg.getDescription());
+                            etStartDate.setText(pkg.getStartDate().replaceAll(" 00:00:00.0", ""));
+                            etEndDate.setText(pkg.getEndDate().replaceAll(" 00:00:00.0", ""));
                             etBasePrice.setText(pkg.getBasePrice()+"");
                             etAgencyCommission.setText(pkg.getAgencyCommission()+"");
                         }
@@ -147,8 +211,8 @@ public class PackageDetailActivity extends AppCompatActivity {
         pkg = new Package(
                 id,
                 etName.getText().toString(),
-                etStartDate.getText().toString() + " 00:00:00",
-                etEndDate.getText().toString() + " 00:00:00",
+                etStartDate.getText().toString() + " 00:00:00.0",
+                etEndDate.getText().toString() + " 00:00:00.0",
                 etDescription.getText().toString(),
                 basePrice,
                 agencyCommission
@@ -187,9 +251,24 @@ public class PackageDetailActivity extends AppCompatActivity {
 
     public void showDatePicker(EditText trigger, String whichDate) {
         Calendar calendar = Calendar.getInstance();
-        int nowYear = calendar.get(Calendar.YEAR);
-        int nowMonth = calendar.get(Calendar.MONTH);
-        int nowDay = calendar.get(Calendar.DAY_OF_MONTH);
+        EditText dateSrc;
+
+        if (whichDate.equalsIgnoreCase("startDate"))
+            dateSrc = etStartDate;
+        else
+            dateSrc = etEndDate;
+
+        int nowYear, nowMonth, nowDay;
+        if (dateSrc.getText().toString().equals("")) {
+            nowYear = calendar.get(Calendar.YEAR);
+            nowMonth = calendar.get(Calendar.MONTH);
+            nowDay = calendar.get(Calendar.DAY_OF_MONTH);
+        } else {
+            LocalDate date = LocalDate.parse(dateSrc.getText().toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            nowYear = date.getYear();
+            nowMonth = date.getMonthValue();
+            nowDay = date.getDayOfMonth();
+        }
 
         DatePickerDialog datePicker = new DatePickerDialog(
                 PackageDetailActivity.this,
