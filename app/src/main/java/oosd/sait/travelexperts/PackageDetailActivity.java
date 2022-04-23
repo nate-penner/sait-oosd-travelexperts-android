@@ -103,6 +103,38 @@ public class PackageDetailActivity extends AppCompatActivity {
             // Edit a package
             int packageId = getIntent().getIntExtra("packageId", 0);
 
+            btnSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    saveForm();
+
+                    // TODO: Get products list from the products suppliers activity
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            int result = dataSource.update(pkg);
+                            Log.d("nate", "result: " + result);
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (result == 1) {
+                                        PackagesActivity.getInstance().loadPackages();
+                                        Toast.makeText(PackagesActivity.getInstance(), "Package updated.",
+                                                Toast.LENGTH_LONG).show();
+                                        finish();
+                                    } else {
+                                        Toast.makeText(PackagesActivity.getInstance(), "Package update failed.",
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                        }
+                    }).start();
+                }
+            });
+
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
