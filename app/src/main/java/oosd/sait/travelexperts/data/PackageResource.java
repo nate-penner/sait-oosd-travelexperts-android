@@ -87,6 +87,27 @@ public class PackageResource extends DataSource<Package, Integer> {
 
     @Override
     public int deleteById(Integer id) {
+        APIRequest request = new APIRequest(
+                API.get("packages"),
+                "/delete/"+id,
+                "DELETE",
+                "application/json",
+                "application/json"
+        );
+
+        String data = request.send();
+
+        Log.d("nate", "response received: " + data);
+
+        try {
+            JSONObject response = new JSONObject(data);
+            Log.d("nate", "message: " + response.getString("message"));
+            if (response.getString("message").equalsIgnoreCase("success"))
+                return 1;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return 0;
     }
 
