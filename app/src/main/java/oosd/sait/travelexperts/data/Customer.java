@@ -123,6 +123,6 @@ public class Customer {
     @NonNull
     @Override
     public String toString() {
-        return firstName + " " + lastName;
+        return lastName + ", " + firstName;
     }
 }

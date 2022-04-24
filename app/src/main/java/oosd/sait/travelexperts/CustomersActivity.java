@@ -3,18 +3,24 @@ package oosd.sait.travelexperts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
 import oosd.sait.travelexperts.data.Customer;
 import oosd.sait.travelexperts.data.CustomerManager;
+import oosd.sait.travelexperts.data.CustomerResource;
 import oosd.sait.travelexperts.data.DataSource;
 
 public class CustomersActivity extends AppCompatActivity {
     ListView lvCustomers;
     Button btnAddCustomer;
-    DataSource<Customer, Integer> ds;
+    DataSource<Customer, Integer> dataSource;
     ArrayAdapter<Customer> adapter;
 
     @Override
@@ -25,7 +31,7 @@ public class CustomersActivity extends AppCompatActivity {
         lvCustomers = findViewById(R.id.lvPackages);
         btnAddCustomer = findViewById(R.id.btnAddCustomer);
 
-        ds = new CustomerManager(this);
+        dataSource = new CustomerResource(this);
 
         adapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_list_item_1);
         lvCustomers.setAdapter(adapter);
@@ -34,7 +40,25 @@ public class CustomersActivity extends AppCompatActivity {
     }
 
     public void loadCustomers() {
+        Log.d("nate", "Loading customers...");
         adapter.clear();
-        ds.getList().forEach(c -> adapter.add(c));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("nate", "Retrieving customer data and sorting...");
+                Collection<Customer> customerList = dataSource.getList().stream()
+                        .sorted(Comparator.comparing(Customer::getLastName))
+                        .collect(Collectors.toList());
+
+                Log.d("nate", "Done. Adding to customer list...");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        customerList.forEach(adapter::add);
+                        Log.d("nate", "Done");
+                    }
+                });
+            }
+        }).start();
     }
 }
