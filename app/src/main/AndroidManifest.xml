@@ -13,9 +13,11 @@
         android:theme="@style/Theme.TravelExperts"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".PackageDetailActivity"
+            android:name=".CustomerDetailActivity"
             android:exported="false" />
-<!--            android:windowSoftInputMode="adjustNothing" />-->
+        <activity
+            android:name=".PackageDetailActivity"
+            android:exported="false" /> <!-- android:windowSoftInputMode="adjustNothing" /> -->
         <activity
             android:name=".ProductDetailActivity"
             android:exported="false"

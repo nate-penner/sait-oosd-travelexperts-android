@@ -2,8 +2,11 @@ package oosd.sait.travelexperts;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -37,6 +40,14 @@ public class CustomersActivity extends AppCompatActivity {
         lvCustomers.setAdapter(adapter);
 
         loadCustomers();
+
+        lvCustomers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), CustomerDetailActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void loadCustomers() {
