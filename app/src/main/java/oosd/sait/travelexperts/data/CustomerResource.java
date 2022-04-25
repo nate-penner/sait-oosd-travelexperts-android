@@ -41,6 +41,7 @@ public class CustomerResource extends DataSource<Customer, Integer> {
             request.send(obj.toString());
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.d("nate", "something awful happened: " + e.getMessage());
         }
 
         return 1;
@@ -132,11 +133,16 @@ public class CustomerResource extends DataSource<Customer, Integer> {
                 "application/json"
         );
         try {
-            request.send();
-            return 1;
+            String data = request.send();
+            JSONObject response = new JSONObject(data);
+
+            if (response.getString("message").equalsIgnoreCase("Delete successful"))
+                return 1;
         } catch (Exception e) {
-            return 0;
+            Log.d("nate", "error: " + e.getMessage());
+            e.printStackTrace();
         }
+        return 0;
     }
 
     @Override

@@ -88,10 +88,15 @@ public class CustomerDetailActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     Collection<Province> provincesList = provinceDataSource.getList();
+                    Collection<AgentMin> agentsList = agentDataSource.getList().stream()
+                            .sorted(Comparator.comparing(AgentMin::getLastName))
+                            .collect(Collectors.toList());;
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             loadProvinces(provincesList);
+                            loadAgents(agentsList);
                             setupCreateMode();
                         }
                     });
@@ -127,10 +132,10 @@ public class CustomerDetailActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Customer customer = saveForm();
                 new AsyncRunnable<>(
                     () -> {
                         // Offload network task to background thread
-                        Customer customer = saveForm();
                         return dataSource.update(customer);
                     },
                     (result) -> {
@@ -178,10 +183,10 @@ public class CustomerDetailActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final Customer customer = saveForm();
                 new AsyncRunnable<>(
                     () -> {
                         // Offload network task to background thread
-                        Customer customer = saveForm();
                         return dataSource.insert(customer);
                     },
                     (result) -> {
@@ -202,8 +207,14 @@ public class CustomerDetailActivity extends AppCompatActivity {
     }
 
     public Customer saveForm() {
+        int id;
+        try {
+            id = Integer.parseInt(etId.getText().toString());
+        } catch (Exception e) {
+            id = 0;
+        }
         Customer customer = new Customer(
-                Integer.parseInt(etId.getText().toString()),
+                id,
                 etFirstName.getText().toString(),
                 etLastName.getText().toString(),
                 etAddress.getText().toString(),
@@ -243,10 +254,14 @@ public class CustomerDetailActivity extends AppCompatActivity {
 
         // Select their province
         Province p;
+        Log.d("nate", "num provinces " + provinceAdapter.getCount());
+        Log.d("nate", "this customer's province is " + customer.getProvince());
         for (int i = 0; i < provinceAdapter.getCount(); i++) {
+            Log.d("nate", "province loop " + i);
              p = provinceAdapter.getItem(i);
-             if (p.getName().equalsIgnoreCase(customer.getProvince())) {
+             if (p.getCode().equalsIgnoreCase(customer.getProvince())) {
                  spProvince.setSelection(i);
+                 Log.d("nate", "the province is " + p.getName());
                  break;
              }
         }
