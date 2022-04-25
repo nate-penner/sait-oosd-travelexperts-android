@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
+import oosd.sait.travelexperts.async.AsyncRunnable;
 import oosd.sait.travelexperts.data.AgentMin;
 import oosd.sait.travelexperts.data.AgentMinResource;
 import oosd.sait.travelexperts.data.Customer;
@@ -114,7 +115,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
                             loadProvinces(provincesList);
                             loadAgents(agentsList);
                             populateFields(customer);
-                            setupEditMode();
+                            setupEditMode(customer);
                         }
                     });
                 }
@@ -122,38 +123,82 @@ public class CustomerDetailActivity extends AppCompatActivity {
         }
     }
 
-    public void setupEditMode() {
+    public void setupEditMode(Customer customer) {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
+                new AsyncRunnable<>(
+                    () -> {
+                        // Offload network task to background thread
                         Customer customer = saveForm();
-                        int result = dataSource.update(customer);
-
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (result == 1) {
-                                    CustomersActivity.getInstance().loadCustomers();
-                                    Toast.makeText(CustomersActivity.getInstance(), "Customer updated.",
-                                            Toast.LENGTH_LONG).show();
-                                    finish();
-                                } else {
-                                    Toast.makeText(CustomersActivity.getInstance(), "Failed to update customer.",
-                                            Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        });
-                    }
-                }).start();
+                        return dataSource.update(customer);
+                    },
+                    (result) -> {
+                        // Update stuff on UI thread
+                        if (result == 1) {
+                            CustomersActivity.getInstance().loadCustomers();
+                            Toast.makeText(CustomersActivity.getInstance(), "Customer updated.",
+                                    Toast.LENGTH_LONG).show();
+                            finish();
+                        } else {
+                            Toast.makeText(CustomersActivity.getInstance(), "Failed to update customer.",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }, CustomerDetailActivity.this
+                )
+                .start();
+            }
+        });
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AsyncRunnable<>(
+                    () -> {
+                        // Offload network task to background thread
+                        return dataSource.deleteById(customer.getCustomerId());
+                    },
+                    (result) -> {
+                        // Update stuff on UI thread
+                        if (result == 1) {
+                            CustomersActivity.getInstance().loadCustomers();
+                            Toast.makeText(CustomersActivity.getInstance(), "Customer deleted.",
+                                    Toast.LENGTH_LONG).show();
+                            finish();
+                        } else {
+                            Toast.makeText(CustomersActivity.getInstance(), "Failed to delete customer.",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }, CustomerDetailActivity.this
+                ).start();
             }
         });
     }
 
     public void setupCreateMode() {
-
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AsyncRunnable<>(
+                    () -> {
+                        // Offload network task to background thread
+                        Customer customer = saveForm();
+                        return dataSource.insert(customer);
+                    },
+                    (result) -> {
+                        // Update stuff on UI thread
+                        if (result == 1) {
+                            CustomersActivity.getInstance().loadCustomers();
+                            Toast.makeText(CustomersActivity.getInstance(), "Customer created.",
+                                    Toast.LENGTH_LONG).show();
+                            finish();
+                        } else {
+                            Toast.makeText(CustomersActivity.getInstance(), "Failed to create customer.",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }, CustomerDetailActivity.this
+                ).start();
+            }
+        });
     }
 
     public Customer saveForm() {
