@@ -54,7 +54,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName12"
+                    android:id="@+id/etId"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
@@ -83,7 +83,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextTextPostalAddress"
+                    android:id="@+id/etFirstName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
@@ -113,13 +113,14 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName8"
+                    android:id="@+id/etLastName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
                     android:layout_weight="6"
                     android:ems="10"
                     android:inputType="textPersonName" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -142,13 +143,14 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName8"
+                    android:id="@+id/etAddress"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
                     android:layout_weight="6"
                     android:ems="10"
                     android:inputType="textPersonName" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -171,7 +173,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName9"
+                    android:id="@+id/etCity"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
@@ -200,12 +202,12 @@
                     android:textStyle="bold" />
 
                 <Spinner
-                    android:id="@+id/spinner2"
+                    android:id="@+id/spProvince"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
                     android:layout_weight="6"
-                    android:spinnerMode="dialog" />
+                    android:spinnerMode="dropdown" />
             </LinearLayout>
 
             <LinearLayout
@@ -228,7 +230,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName10"
+                    android:id="@+id/etPostalCode"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
@@ -257,11 +259,12 @@
                     android:textStyle="bold" />
 
                 <Spinner
-                    android:id="@+id/spinner3"
+                    android:id="@+id/spCountry"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
-                    android:layout_weight="6" />
+                    android:layout_weight="6"
+                    android:spinnerMode="dropdown" />
             </LinearLayout>
 
             <LinearLayout
@@ -284,7 +287,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextPhone"
+                    android:id="@+id/etHomePhone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
@@ -313,7 +316,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextPhone2"
+                    android:id="@+id/etBusinessPhone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
@@ -342,13 +345,41 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextTextEmailAddress"
+                    android:id="@+id/etEmail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
                     android:layout_weight="6"
                     android:ems="10"
                     android:inputType="textEmailAddress" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="4"
+                    android:gravity="end"
+                    android:text="Agent:"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spAgents"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="6"
+                    android:spinnerMode="dropdown" />
             </LinearLayout>
 
             <LinearLayout
@@ -378,19 +409,20 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layoutBookings"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btnAddEditProducts"
+                    android:id="@+id/btnViewBookings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
                     android:layout_weight="1"
                     android:paddingVertical="15dp"
-                    android:text="Add/Edit Products" />
+                    android:text="view bookings" />
             </LinearLayout>
 
         </LinearLayout>

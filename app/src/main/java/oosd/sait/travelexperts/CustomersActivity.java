@@ -25,11 +25,18 @@ public class CustomersActivity extends AppCompatActivity {
     Button btnAddCustomer;
     DataSource<Customer, Integer> dataSource;
     ArrayAdapter<Customer> adapter;
+    static CustomersActivity instance;
+
+    public static CustomersActivity getInstance() {
+        return instance;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customers);
+
+        instance = this;
 
         lvCustomers = findViewById(R.id.lvPackages);
         btnAddCustomer = findViewById(R.id.btnAddCustomer);
@@ -45,6 +52,17 @@ public class CustomersActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), CustomerDetailActivity.class);
+                intent.putExtra("mode", "edit");
+                intent.putExtra("customer", adapter.getItem(i));
+                startActivity(intent);
+            }
+        });
+
+        btnAddCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CustomerDetailActivity.class);
+                intent.putExtra("mode", "create");
                 startActivity(intent);
             }
         });

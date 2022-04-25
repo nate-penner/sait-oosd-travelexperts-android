@@ -48,12 +48,73 @@ public class CustomerResource extends DataSource<Customer, Integer> {
 
     @Override
     public Customer getById(Integer id) {
+        APIRequest request = new APIRequest(
+                API.get("customers"),
+                "/get/"+id,
+                "GET",
+                "application/json",
+                "application/json"
+        );
+        String data = request.send();
+
+        Log.d("nate", "package data received: " + data);
+        try {
+            JSONObject response = new JSONObject(data);
+            Customer customer = new Customer(
+                    response.getInt("customerId"),
+                    response.getString("custFirstName"),
+                    response.getString("custLastName"),
+                    response.getString("custAddress"),
+                    response.getString("custCity"),
+                    response.getString("custProv"),
+                    response.getString("custPostal"),
+                    response.getString("custCountry"),
+                    response.getString("custHomePhone"),
+                    response.getString("custBusPhone"),
+                    response.getString("custEmail"),
+                    response.getInt("agentId")
+            );
+            return customer;
+        } catch (JSONException e) {
+            Log.d("nate", "JSON exception:");
+            Log.d("nate", e.getMessage());
+        } catch (IllegalArgumentException e) {
+            Log.d("nate", "Illegal argument");
+            Log.d("nate", e.getMessage());
+        }
+
         return null;
     }
 
     @Override
     public int update(Customer data) {
-        return 0;
+        APIRequest request = new APIRequest(
+                API.get("customers"),
+                "/update",
+                "POST",
+                "application/json",
+                "application/json"
+        );
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("customerId", data.getCustomerId());
+            obj.put("custFirstName", data.getFirstName());
+            obj.put("custLastName", data.getLastName());
+            obj.put("custAddress", data.getAddress());
+            obj.put("custCity", data.getCity());
+            obj.put("custProv", data.getProvince());
+            obj.put("custPostal", data.getPostalCode());
+            obj.put("custCountry", data.getCountry());
+            obj.put("custHomePhone", data.getHomePhone());
+            obj.put("custBusPhone", data.getBusinessPhone());
+            obj.put("custEmail", data.getEmail());
+            obj.put("agentId", data.getAgentId());
+            request.send(obj.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return 1;
     }
 
     @Override
@@ -63,7 +124,19 @@ public class CustomerResource extends DataSource<Customer, Integer> {
 
     @Override
     public int deleteById(Integer id) {
-        return 0;
+        APIRequest request = new APIRequest(
+                API.get("customers"),
+                "/delete/"+id,
+                "DELETE",
+                "application/json",
+                "application/json"
+        );
+        try {
+            request.send();
+            return 1;
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
