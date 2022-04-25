@@ -2,7 +2,9 @@ package oosd.sait.travelexperts.data;
 
 import androidx.annotation.NonNull;
 
-public class Customer {
+import java.io.Serializable;
+
+public class Customer implements Serializable {
     private int customerId;
     private String firstName, lastName;
     private String address, city, province, postalCode, country;

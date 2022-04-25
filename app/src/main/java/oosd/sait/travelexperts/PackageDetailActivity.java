@@ -13,13 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.sql.Timestamp;
 import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import oosd.sait.travelexperts.data.DataSource;
@@ -52,7 +49,7 @@ public class PackageDetailActivity extends AppCompatActivity {
         etName.setFocusedByDefault(true);
         btnSave = findViewById(R.id.btnSave);
         btnDelete = findViewById(R.id.btnDelete);
-        btnAddEditProducts = findViewById(R.id.btnAddEditProducts);
+        btnAddEditProducts = findViewById(R.id.btnViewBookings);
 
         // Don't let the user manually enter dates
         etStartDate.setFocusable(false);

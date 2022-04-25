@@ -25,6 +25,8 @@ public class SplashActivity extends AppCompatActivity {
         API.map("packages", "http://10.0.2.2:8080/Group5_REST_service_war_exploded/api/package");
         API.map("bookings", "http://10.0.2.2:8080/Group5_REST_service_war_exploded/api/booking");
         API.map("customers", "http://10.0.2.2:8080/Group5_REST_service_war_exploded/api/customer");
+        API.map("regions", "http://10.0.2.2:8080/Group5_REST_service_war_exploded/api/region");
+        API.map("agents", "http://10.0.2.2:8080/Group5_REST_service_war_exploded/api/agent");
 
         new Handler().postDelayed(new Runnable() {
             @Override
