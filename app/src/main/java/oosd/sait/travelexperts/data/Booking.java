@@ -2,20 +2,21 @@ package oosd.sait.travelexperts.data;
 
 import androidx.annotation.NonNull;
 
-public class Booking {
+import java.io.Serializable;
+import java.util.List;
+
+public class Booking implements Serializable {
     private int id;
     private String bookingDate, bookingNo;
     private double travelerCount;
-    private int customerId;
-    private int packageId;
+    private BookingDetails[] bookingDetails;
 
-    public Booking(int id, String bookingDate, String bookingNo, double travelerCount, int customerId, int packageId) {
+    public Booking(int id, String bookingDate, String bookingNo, double travelerCount, BookingDetails[] bookingDetails) {
         this.id = id;
         this.bookingDate = bookingDate;
         this.bookingNo = bookingNo;
         this.travelerCount = travelerCount;
-        this.customerId = customerId;
-        this.packageId = packageId;
+        this.bookingDetails = bookingDetails;
     }
 
     public int getId() {
@@ -50,20 +51,12 @@ public class Booking {
         this.travelerCount = travelerCount;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public BookingDetails[] getBookingDetails() {
+        return bookingDetails;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
-    public int getPackageId() {
-        return packageId;
-    }
-
-    public void setPackageId(int packageId) {
-        this.packageId = packageId;
+    public void setBookingDetails(BookingDetails[] bookingDetails) {
+        this.bookingDetails = bookingDetails;
     }
 
     @NonNull

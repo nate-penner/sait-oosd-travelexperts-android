@@ -37,7 +37,7 @@ public class CustomersActivity extends AppCompatActivity {
 
         instance = this;
 
-        lvCustomers = findViewById(R.id.lvBookings);
+        lvCustomers = findViewById(R.id.lvDetails);
         btnAddCustomer = findViewById(R.id.btnAddCustomer);
 
         dataSource = new CustomerResource(this);

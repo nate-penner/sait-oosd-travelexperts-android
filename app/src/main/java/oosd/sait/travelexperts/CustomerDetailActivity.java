@@ -182,7 +182,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), BookingsActivity.class);
-                intent.putExtra("customerId", customer.getCustomerId());
+                intent.putExtra("customer", customer);
                 startActivity(intent);
             }
         });
