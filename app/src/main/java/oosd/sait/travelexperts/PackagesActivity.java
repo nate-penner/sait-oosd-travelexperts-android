@@ -34,7 +34,7 @@ public class PackagesActivity extends AppCompatActivity {
 
         instance = this;
 
-        lvPackages = findViewById(R.id.lvBookings);
+        lvPackages = findViewById(R.id.lvDetails);
         btnAddPackage = findViewById(R.id.btnAddPackage);
         adapter = new ArrayAdapter<Package>(this, android.R.layout.simple_list_item_1);
         lvPackages.setAdapter(adapter);

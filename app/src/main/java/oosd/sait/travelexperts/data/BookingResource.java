@@ -1,5 +1,7 @@
 package oosd.sait.travelexperts.data;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,23 +53,33 @@ public class BookingResource implements DataResource<Booking, Integer> {
 
             for (int i = 0; i < bookingsData.length(); i++) {
                 JSONObject booking = bookingsData.getJSONObject(i);
-                int packageId = 0;
-                try {
-                    booking.getInt("packageId");
-                } catch (Exception e) {}
+                JSONArray details = booking.getJSONArray("details");
+                BookingDetails[] bookingDetails = new BookingDetails[details.length()];
+
+                for (int j = 0; j < details.length(); j++) {
+                    JSONObject detailsObj = details.getJSONObject(j);
+                    bookingDetails[j] = new BookingDetails(
+                            Timestamp.valueOf(detailsObj.getString("tripStart")).toString(),
+                            Timestamp.valueOf(detailsObj.getString("tripEnd")).toString(),
+                            detailsObj.getString("description"),
+                            detailsObj.getString("destination"),
+                            detailsObj.getDouble("basePrice")
+                    );
+                }
+
                 bookingsList.add(
                     new Booking(
                         booking.getInt("bookingId"),
                         Timestamp.valueOf(booking.getString("bookingDate")).toString(),
                         booking.getString("bookingNo"),
                         booking.getDouble("travelerCount"),
-                        booking.getInt("customerId"),
-                        packageId
+                        bookingDetails
                     )
                 );
             }
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.d("nate", "something went terribly wrong: " + e.getMessage());
         }
 
         return bookingsList;
