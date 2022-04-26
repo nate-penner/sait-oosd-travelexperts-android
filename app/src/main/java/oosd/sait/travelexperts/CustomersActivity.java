@@ -16,7 +16,6 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import oosd.sait.travelexperts.data.Customer;
-import oosd.sait.travelexperts.data.CustomerManager;
 import oosd.sait.travelexperts.data.CustomerResource;
 import oosd.sait.travelexperts.data.DataSource;
 
@@ -38,7 +37,7 @@ public class CustomersActivity extends AppCompatActivity {
 
         instance = this;
 
-        lvCustomers = findViewById(R.id.lvPackages);
+        lvCustomers = findViewById(R.id.lvBookings);
         btnAddCustomer = findViewById(R.id.btnAddCustomer);
 
         dataSource = new CustomerResource(this);

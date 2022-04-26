@@ -38,7 +38,7 @@ public class ProductsActivity extends AppCompatActivity {
 
         ds = new ProductResource(getApplicationContext());
 
-        lvProducts = findViewById(R.id.lvPackages);
+        lvProducts = findViewById(R.id.lvBookings);
         btnAddProduct = findViewById(R.id.btnAddPackage);
 
         adapter = new ArrayAdapter<Product>(this, android.R.layout.simple_list_item_1);

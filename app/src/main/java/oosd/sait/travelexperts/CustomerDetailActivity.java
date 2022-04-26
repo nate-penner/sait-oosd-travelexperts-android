@@ -2,6 +2,7 @@ package oosd.sait.travelexperts;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -175,6 +176,14 @@ public class CustomerDetailActivity extends AppCompatActivity {
                         }
                     }, CustomerDetailActivity.this
                 ).start();
+            }
+        });
+        btnViewBookings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), BookingsActivity.class);
+                intent.putExtra("customerId", customer.getCustomerId());
+                startActivity(intent);
             }
         });
     }

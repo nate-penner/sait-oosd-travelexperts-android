@@ -7,7 +7,7 @@
     tools:context=".CustomersActivity">
 
     <ListView
-        android:id="@+id/lvPackages"
+        android:id="@+id/lvBookings"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnAddCustomer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tvHeader" />
 
     <Button
         android:id="@+id/btnAddCustomer"
@@ -28,11 +28,11 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/lvPackages"
-        app:layout_constraintStart_toStartOf="@+id/lvPackages" />
+        app:layout_constraintEnd_toEndOf="@+id/lvBookings"
+        app:layout_constraintStart_toStartOf="@+id/lvBookings" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvHeader"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
