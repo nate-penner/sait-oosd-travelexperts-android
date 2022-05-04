@@ -29,6 +29,7 @@ tools:context=".SplashActivity">
     android:id="@+id/imageView2"
     android:layout_width="83dp"
     android:layout_height="78dp"
+    app:tint="@color/rust"
     app:layout_constraintBottom_toTopOf="@+id/textView2"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import java.text.MessageFormat;
 
+import oosd.sait.travelexperts.data.DataResource;
 import oosd.sait.travelexperts.data.DataSource;
 import oosd.sait.travelexperts.data.Product;
 import oosd.sait.travelexperts.data.ProductResource;
@@ -36,7 +37,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         String mode = getIntent().getStringExtra("mode");
 
-        DataSource<Product, Integer> ds = new ProductResource(this);
+        DataResource<Product, Integer> ds = new ProductResource();
 
         if (mode.equals("create")) {
             tvHeader.setText("New Product");

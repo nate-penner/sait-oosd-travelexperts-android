@@ -47,11 +47,11 @@
             android:text="Products" />
 
         <Button
-            android:id="@+id/btnBookings"
+            android:id="@+id/btnSuppliers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
-            android:text="Bookings" />
+            android:text="Suppliers" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import java.util.Collection;
 
+import oosd.sait.travelexperts.data.DataResource;
 import oosd.sait.travelexperts.data.DataSource;
 import oosd.sait.travelexperts.data.Product;
 import oosd.sait.travelexperts.data.ProductResource;
@@ -21,7 +22,7 @@ public class ProductsActivity extends AppCompatActivity {
     ListView lvProducts;
     Button btnAddProduct;
     ArrayAdapter<Product> adapter;
-    DataSource<Product, Integer> ds;
+    DataResource<Product, Integer> ds;
 
     public static ProductsActivity instance;
 
@@ -36,9 +37,9 @@ public class ProductsActivity extends AppCompatActivity {
 
         instance = this;
 
-        ds = new ProductResource(getApplicationContext());
+        ds = new ProductResource();
 
-        lvProducts = findViewById(R.id.lvDetails);
+        lvProducts = findViewById(R.id.lvProducts);
         btnAddProduct = findViewById(R.id.btnAddPackage);
 
         adapter = new ArrayAdapter<Product>(this, android.R.layout.simple_list_item_1);
