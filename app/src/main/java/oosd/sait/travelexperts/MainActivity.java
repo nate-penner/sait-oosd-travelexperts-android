@@ -10,7 +10,7 @@ import android.widget.Button;
 import oosd.sait.travelexperts.data.DBHelper;
 
 public class MainActivity extends AppCompatActivity {
-    Button btnCustomers, btnPackages, btnProducts, btnBookings;
+    Button btnCustomers, btnPackages, btnProducts, btnSuppliers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         btnCustomers = findViewById(R.id.btnCustomers);
         btnPackages = findViewById(R.id.btnPackages);
         btnProducts = findViewById(R.id.btnProducts);
-        btnBookings = findViewById(R.id.btnBookings);
+        btnSuppliers = findViewById(R.id.btnSuppliers);
 
         btnCustomers.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btnBookings.setOnClickListener(new View.OnClickListener() {
+        btnSuppliers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BookingsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SuppliersActivity.class);
                 startActivity(intent);
             }
         });

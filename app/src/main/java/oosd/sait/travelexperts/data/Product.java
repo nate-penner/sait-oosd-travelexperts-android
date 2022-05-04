@@ -2,7 +2,9 @@ package oosd.sait.travelexperts.data;
 
 import androidx.annotation.NonNull;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private int productId;
     private String productName;
 

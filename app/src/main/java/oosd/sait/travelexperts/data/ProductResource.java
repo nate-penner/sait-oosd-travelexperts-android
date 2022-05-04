@@ -22,12 +22,7 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class ProductResource extends DataSource<Product, Integer> {
-
-    public ProductResource(Context context) {
-        super(context);
-    }
-
+public class ProductResource implements DataResource<Product, Integer> {
     @Override
     public int insert(Product data) {
         APIRequest request = new APIRequest(

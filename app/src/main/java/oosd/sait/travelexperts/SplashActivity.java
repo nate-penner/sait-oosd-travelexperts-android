@@ -27,12 +27,13 @@ public class SplashActivity extends AppCompatActivity {
         API.map("customers", "http://10.0.2.2:8080/Group5_REST_service_war_exploded/api/customer");
         API.map("regions", "http://10.0.2.2:8080/Group5_REST_service_war_exploded/api/region");
         API.map("agents", "http://10.0.2.2:8080/Group5_REST_service_war_exploded/api/agent");
+        API.map("suppliers", "http://10.0.2.2:8080/Group5_REST_service_war_exploded/api/supplier");
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Log.d("nate", "this ran");
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 

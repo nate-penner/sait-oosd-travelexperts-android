@@ -13,6 +13,15 @@
         android:theme="@style/Theme.TravelExperts"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SupplierDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SuppliersActivity"
+            android:exported="false" />
+        <activity
             android:name=".BookingDetailActivity"
             android:exported="false" />
         <activity

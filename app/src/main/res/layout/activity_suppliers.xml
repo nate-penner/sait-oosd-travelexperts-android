@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductsActivity">
+    tools:context=".SuppliersActivity">
 
     <TextView
         android:id="@+id/tvHeader"
@@ -13,7 +13,7 @@
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:text="Products"
+        android:text="Suppliers"
         android:background="@color/rust"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -23,28 +23,29 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/lvProducts"
+        android:id="@+id/lvSuppliers"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddPackage"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddSupplier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvHeader" />
 
     <Button
-        android:id="@+id/btnAddPackage"
+        android:id="@+id/btnAddSupplier"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:paddingVertical="20dp"
-        android:text="Add Product"
+        android:text="Add Supplier"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/lvProducts"
-        app:layout_constraintStart_toStartOf="@+id/lvProducts" />
+        app:layout_constraintEnd_toEndOf="@+id/lvSuppliers"
+        app:layout_constraintStart_toStartOf="@+id/lvSuppliers" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
