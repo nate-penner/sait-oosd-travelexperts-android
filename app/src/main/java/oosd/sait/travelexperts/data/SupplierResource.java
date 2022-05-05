@@ -13,6 +13,29 @@ import java.util.List;
 public class SupplierResource implements DataResource<Supplier, Integer> {
     @Override
     public int insert(Supplier data) {
+        APIRequest request = new APIRequest(
+                API.get("suppliers"),
+                "/create",
+                "PUT",
+                "application/json",
+                "application/json"
+        );
+
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put("id", data.getId());
+            obj.put("supName", data.getName());
+
+            String responseData = request.send(obj.toString());
+
+            Log.d("nate", responseData);
+
+            JSONObject response = new JSONObject(responseData);
+
+            return response.getInt("statusCode");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 

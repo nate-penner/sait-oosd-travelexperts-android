@@ -52,6 +52,13 @@ public class SuppliersActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnAddSupplier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SupplierCreateActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void loadSuppliers() {

@@ -50,6 +50,7 @@ public class PackageDetailActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
         btnDelete = findViewById(R.id.btnDelete);
         btnAddEditProducts = findViewById(R.id.btnViewBookings);
+        btnAddEditProducts.setVisibility(View.GONE);
 
         // Don't let the user manually enter dates
         etStartDate.setFocusable(false);
@@ -272,7 +273,7 @@ public class PackageDetailActivity extends AppCompatActivity {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        trigger.setText(String.format(Locale.US, "%d-%02d-%02d", year, month, day));
+                        trigger.setText(String.format(Locale.US, "%d-%02d-%02d", year, month+1, day));
                         Calendar c = Calendar.getInstance();
                         c.set(year, month, day);
 
