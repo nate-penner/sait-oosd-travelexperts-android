@@ -7,6 +7,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * @deprecated Replaced by {@link API} and {@link APIRequest}
+ * @author Nate Penner
+ * */
 public class RequestHelper {
     public static String simpleGet(String uri) {
         StringBuffer buffer = new StringBuffer();

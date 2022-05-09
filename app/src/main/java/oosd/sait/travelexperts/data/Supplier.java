@@ -5,6 +5,10 @@ import androidx.annotation.NonNull;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Data class representing a supplier record
+ * @author Nate Penner
+ * */
 public class Supplier implements Serializable {
     private int id;
     private String name;

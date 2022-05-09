@@ -17,9 +17,18 @@ import oosd.sait.travelexperts.data.Product;
 import oosd.sait.travelexperts.data.Supplier;
 import oosd.sait.travelexperts.data.SupplierResource;
 
+/**
+ * Create supplier activity. Allows the user to create a new supplier. This should eventually be
+ * merged with the SupplierDetailActivity to allow editing of supplier information along with
+ * products offered
+ * @author Nate Penner
+ * */
 public class SupplierCreateActivity extends AppCompatActivity {
+    // UI elements
     EditText etSupplierId, etSupplierName;
     Button btnSave;
+
+    // Data variables
     DataResource<Supplier, Integer> supplierData;
 
     @Override
@@ -27,22 +36,30 @@ public class SupplierCreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_create);
 
+        // Setup UI references
         etSupplierId = findViewById(R.id.etSupplierId);
         etSupplierName = findViewById(R.id.etSupplierName);
         btnSave = findViewById(R.id.btnSave);
         supplierData = new SupplierResource();
 
+        // Setup save button click handler
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Create a new Supplier object from the data entered
                 Supplier supplier = new Supplier(
                         Integer.parseInt(etSupplierId.getText().toString()),
                         etSupplierName.getText().toString(),
                         new ArrayList<>()
                 );
+
+                // Insert the data via the API on another thread
                 new AsyncRunnable<>(
                         () -> supplierData.insert(supplier),
                         (result) -> {
+                            // On the UI thread, show a status message, reload suppliers list for
+                            // the previous activity, and return, or stay on this activity if
+                            // the insert failed
                             if (result == 1) {
                                 Toast.makeText(getApplicationContext(), "Supplier created.",
                                         Toast.LENGTH_LONG).show();

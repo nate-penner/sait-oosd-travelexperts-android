@@ -2,6 +2,10 @@ package oosd.sait.travelexperts.data;
 
 import androidx.annotation.NonNull;
 
+/**
+ * Data class representing a Canadian province
+ * @author Nate Penner
+ * */
 public class Province {
     private String name, code;
 

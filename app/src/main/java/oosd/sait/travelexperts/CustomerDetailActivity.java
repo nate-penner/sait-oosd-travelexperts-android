@@ -28,12 +28,19 @@ import oosd.sait.travelexperts.data.DataSource;
 import oosd.sait.travelexperts.data.Province;
 import oosd.sait.travelexperts.data.RegionResource;
 
+/**
+* Customer details activity - display information about a customer that can be edited
+* @author Nate Penner
+* */
 public class CustomerDetailActivity extends AppCompatActivity {
+    // UI Elements
     EditText etId, etFirstName, etLastName, etAddress, etCity, etPostalCode,
              etHomePhone, etBusinessPhone, etEmail;
     Spinner spProvince, spCountry, spAgents;
     Button btnSave, btnDelete, btnViewBookings;
     LinearLayout layoutBookings;
+
+    // Data handling variables
     DataSource<Customer, Integer> dataSource;
     DataSource<Province, Integer> provinceDataSource;
     DataResource<AgentMin, Integer> agentDataSource;
@@ -46,6 +53,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_detail);
 
+        // Initialize UI references
         etId = findViewById(R.id.etId);
         etFirstName = findViewById(R.id.etFirstName);
         etLastName = findViewById(R.id.etLastName);
@@ -75,27 +83,36 @@ public class CustomerDetailActivity extends AppCompatActivity {
         spCountry.setAdapter(countryAdapter);
         spAgents.setAdapter(agentAdapter);
 
+        // Only Canada is supported for now
         countryAdapter.add("Canada");
 
+        // Disable the ID field
         etId.setFocusable(false);
         etFirstName.setFocusedByDefault(true);
 
+        // Check if we are in create or edit mode
         String mode = getIntent().getStringExtra("mode");
 
         if (mode.equalsIgnoreCase("create")) {
+            // No need for the delete button in create mode
             btnDelete.setVisibility(View.GONE);
             layoutBookings.setVisibility(View.GONE);
+
+            // Retrieve data and setup UI
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    // Use a different thread for network activity
                     Collection<Province> provincesList = provinceDataSource.getList();
                     Collection<AgentMin> agentsList = agentDataSource.getList().stream()
                             .sorted(Comparator.comparing(AgentMin::getLastName))
-                            .collect(Collectors.toList());;
+                            .collect(Collectors.toList());
 
+                    // Run on UI thread
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            // Load the downloaded data into Spinners, then set up create mode
                             loadProvinces(provincesList);
                             loadAgents(agentsList);
                             setupCreateMode();
@@ -104,23 +121,32 @@ public class CustomerDetailActivity extends AppCompatActivity {
                 }
             }).start();
         } else {
+            // Get the data of the selected customer from the previous activity
             Customer customer = (Customer)getIntent().getSerializableExtra("customer");
             Log.d("nate", "the customer id is " + customer.getCustomerId());
 
+            // Retrieve data and setup UI
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    // Perform network operations on another thread
                     Collection<Province> provincesList = provinceDataSource.getList();
                     Collection<AgentMin> agentsList = agentDataSource.getList().stream()
                             .sorted(Comparator.comparing(AgentMin::getLastName))
-                            .collect(Collectors.toList());;
+                            .collect(Collectors.toList());
 
+                    // Setup UI on the UI thread
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            // Load downloaded data into spinners
                             loadProvinces(provincesList);
                             loadAgents(agentsList);
+
+                            // fill in fields with customer data
                             populateFields(customer);
+
+                            // Set up the UI for edit mode
                             setupEditMode(customer);
                         }
                     });
@@ -129,11 +155,18 @@ public class CustomerDetailActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Set up the UI for edit mode
+     * @param customer The customer being modified
+     * */
     public void setupEditMode(Customer customer) {
+        // Setup on click listener for save button
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Customer customer = saveForm();
+                Customer customer = saveForm();     // Get the data from the UI
+
+                // Update the customer data
                 new AsyncRunnable<>(
                     () -> {
                         // Offload network task to background thread
@@ -155,6 +188,8 @@ public class CustomerDetailActivity extends AppCompatActivity {
                 .start();
             }
         });
+
+        // Set up the delete button click listener
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -178,17 +213,24 @@ public class CustomerDetailActivity extends AppCompatActivity {
                 ).start();
             }
         });
+
+        // Set up the view bookings button click handler
         btnViewBookings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), BookingsActivity.class);
+                // Pass the customer to the Booking activity
                 intent.putExtra("customer", customer);
                 startActivity(intent);
             }
         });
     }
 
+    /**
+     * Sets up the UI for customer creation mode
+     * */
     public void setupCreateMode() {
+        // Set up save button click listener
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -215,6 +257,10 @@ public class CustomerDetailActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Pulls all customer data from the UI and creates a Customer object out of it
+     * @return a new Customer object
+     * */
     public Customer saveForm() {
         int id;
         try {
@@ -240,16 +286,26 @@ public class CustomerDetailActivity extends AppCompatActivity {
         return customer;
     }
 
+    /**
+     * Loads a collection of provinces into the adapter for the spinner
+     * */
     public void loadProvinces(Collection<Province> provincesList) {
         provinceAdapter.clear();
         provincesList.forEach(provinceAdapter::add);
     }
 
+    /**
+     * Loads a collection of agents into the adapter for the spinner
+     * */
     public void loadAgents(Collection<AgentMin> agentsList) {
         agentAdapter.clear();
         agentsList.forEach(agentAdapter::add);
     }
 
+    /**
+     * Loads the customer data received from the previous activity into the user interface, where it
+     * can be edited.
+     * */
     public void populateFields(Customer customer) {
         etId.setText(MessageFormat.format("{0}", customer.getCustomerId()));
         etFirstName.setText(customer.getFirstName());

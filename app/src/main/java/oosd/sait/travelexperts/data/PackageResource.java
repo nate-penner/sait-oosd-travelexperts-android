@@ -13,6 +13,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * A data source for obtaining vacation package information from an API, which implements {@link DataResource}
+ * (see for documentation of interface methods)
+ * @see Package for information about the type of data used by this resource
+ * @apiNote Only methods used so far in this project are implemented
+ * @author Nate Penner
+ * */
 public class PackageResource extends DataSource<Package, Integer> {
 
     public PackageResource(Context context) {

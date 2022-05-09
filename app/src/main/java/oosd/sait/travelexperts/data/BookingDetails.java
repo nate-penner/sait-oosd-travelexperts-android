@@ -2,6 +2,10 @@ package oosd.sait.travelexperts.data;
 
 import java.io.Serializable;
 
+/**
+ * A class representing the details of a booking record
+ * @author Nate
+ * */
 public class BookingDetails implements Serializable {
     private String tripStart, tripEnd, description, destination;
     private double basePrice;
@@ -14,6 +18,7 @@ public class BookingDetails implements Serializable {
         this.basePrice = basePrice;
     }
 
+    // Getters and setters
     public String getTripStart() {
         return tripStart;
     }

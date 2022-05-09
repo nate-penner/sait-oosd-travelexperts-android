@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * @deprecated Replaced by {@link ProductResource}. This is kept for reference only and should not
+ * be used
+ * @author Nate Penner
+ * */
 public class ProductManager extends DataSource<Product, Integer> {
 
     public ProductManager(Context context) {

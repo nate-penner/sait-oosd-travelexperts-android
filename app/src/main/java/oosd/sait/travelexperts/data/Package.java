@@ -4,6 +4,10 @@ import androidx.annotation.NonNull;
 
 import java.util.Date;
 
+/**
+ * Data class representing a vacation package record
+ * @author Nate Penner
+ * */
 public class Package {
     private int id;
     private String name;
