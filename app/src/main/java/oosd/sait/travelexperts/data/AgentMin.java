@@ -2,7 +2,14 @@ package oosd.sait.travelexperts.data;
 
 import androidx.annotation.NonNull;
 
-public class AgentMin {
+import java.io.Serializable;
+import java.text.MessageFormat;
+import java.util.Locale;
+
+/**
+ * Data class representing some minimal information about a travel agent
+ * */
+public class AgentMin implements Serializable {
     private int id;
     private String firstName, lastName;
 
@@ -34,6 +41,10 @@ public class AgentMin {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getUsername() {
+        return MessageFormat.format("{0}.{1}", firstName.toLowerCase(), lastName.toLowerCase());
     }
 
     @NonNull

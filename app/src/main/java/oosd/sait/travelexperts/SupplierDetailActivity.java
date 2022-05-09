@@ -29,49 +29,71 @@ import oosd.sait.travelexperts.data.ProductResource;
 import oosd.sait.travelexperts.data.Supplier;
 import oosd.sait.travelexperts.data.SupplierResource;
 
+/**
+ * Supplier detail activity. Allows the user to adjust what products are offered by
+ * this supplier
+ * @author Nate Penner
+ * */
 public class SupplierDetailActivity extends AppCompatActivity {
+    // UI elements
     TextView tvHeader;
     ListView lvSelectedProducts, lvAllProducts;
     Button btnSave;
-    DataResource<Supplier, Integer> supplierData;
-    DataResource<Product, Integer> productData;
-    SimpleAdapter selectedAdapter, allAdapter;
-    Supplier supplier;
-    Collection<Product> allProductsList;
+
+    // Data variables
+    DataResource<Supplier, Integer> supplierData;   // for retrieving data about suppliers
+    DataResource<Product, Integer> productData;     // for retrieving data about products
+    SimpleAdapter selectedAdapter, allAdapter;      // adapters for selected products and remaining products
+    Supplier supplier;  // The current supplier being edited
+    Collection<Product> allProductsList;    // A list of all products in the database
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_detail);
 
+        // Setup UI references
         tvHeader = findViewById(R.id.tvHeader);
         lvSelectedProducts = findViewById(R.id.lvSelectedProducts);
         lvAllProducts = findViewById(R.id.lvAllProducts);
         btnSave = findViewById(R.id.btnSave);
 
+        // Setup data sources
         supplierData = new SupplierResource();
         productData = new ProductResource();
 
+        // Get the supplier from the previous activity
         supplier = (Supplier)getIntent().getSerializableExtra("supplier");
         tvHeader.setText(supplier.getName());
+
+        // Show the selected products in the custom adapter layout
         updateSelectedProducts();
 
+        // Load a list available products into the custom adapter layout
         loadProducts();
     }
 
+    // Load products from the API, filtering out already selected ones
     public void loadProducts() {
         new AsyncRunnable<>(
                 productData::getList,
                 (result) -> {
                     allProductsList = result;
+
+                    // filter out products already offered
                     removeDuplicates();
+
+                    // update the offered (selected) products list
                     updateAddProducts();
+
+                    // setup UI event handlers
                     initUIEvents();
                 },
                 SupplierDetailActivity.this
         ).start();
     }
 
+    // Start from the list of all products, then remove any already offered by the supplier
     public void removeDuplicates() {
         allProductsList = allProductsList.stream()
                 .filter(p ->
@@ -80,7 +102,10 @@ public class SupplierDetailActivity extends AppCompatActivity {
                 ).collect(Collectors.toList());
     }
 
+    // Setup the UI event handlers
     public void initUIEvents() {
+        // When clicking a product from the all products (available products) list,
+        // move it to the selected (offered) products list
         lvAllProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -93,6 +118,9 @@ public class SupplierDetailActivity extends AppCompatActivity {
                 updateAddProducts();
             }
         });
+
+        // When clicking a product from the selected (offered) list,
+        // move it to the all products (available products) list
         lvSelectedProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -103,12 +131,16 @@ public class SupplierDetailActivity extends AppCompatActivity {
                 updateAddProducts();
             }
         });
+
+        // Perform the save operation on click
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Update the supplier data on a new thread
                 new AsyncRunnable<>(
                         () -> supplierData.update(supplier),
                         (result) -> {
+                            // Show a status message on the main thread. Exit the activity on success
                             if (result == 1) {
                                 // Updated correctly
                                 Toast.makeText(getApplicationContext(), "Supplier products modified.",
@@ -135,6 +167,7 @@ public class SupplierDetailActivity extends AppCompatActivity {
         });
     }
 
+    // Update the selected products custom list adapter
     public void updateSelectedProducts() {
         ArrayList<HashMap<String, String>> data = new ArrayList<>();
         supplier.setProducts(
@@ -158,6 +191,8 @@ public class SupplierDetailActivity extends AppCompatActivity {
         lvSelectedProducts.setAdapter(selectedAdapter);
     }
 
+    // Update the list of available products in the customer adapter that could
+    // be added
     public void updateAddProducts() {
         ArrayList<HashMap<String, String>> data = new ArrayList<>();
         allProductsList = allProductsList.stream()

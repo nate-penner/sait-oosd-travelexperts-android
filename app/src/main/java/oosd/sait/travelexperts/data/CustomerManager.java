@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * @deprecated This code is kept for future reference only. Replaced by {@link CustomerResource}
+ * @author Nate Penner
+ * */
 public class CustomerManager extends DataSource<Customer, Integer> {
 
     public CustomerManager(Context context) {

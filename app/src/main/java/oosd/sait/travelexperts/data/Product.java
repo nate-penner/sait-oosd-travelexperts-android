@@ -4,6 +4,10 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
+/**
+ * Data class representing a product record
+ * @author Nate Penner
+ * */
 public class Product implements Serializable {
     private int productId;
     private String productName;

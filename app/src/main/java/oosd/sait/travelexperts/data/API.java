@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ * A static class for storing URLs for API endpoints and mapping them to string keys
+ * */
 public class API {
     private static final HashMap<String, String> apiMap = new HashMap<>();
 

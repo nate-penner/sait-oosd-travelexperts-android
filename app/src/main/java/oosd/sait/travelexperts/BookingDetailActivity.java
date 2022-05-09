@@ -17,9 +17,16 @@ import java.util.Locale;
 import oosd.sait.travelexperts.data.Booking;
 import oosd.sait.travelexperts.data.BookingDetails;
 
+/**
+ * Booking detail activity. Displays details of a booking in a list layout
+ * @author Nate Penner
+ * */
 public class BookingDetailActivity extends AppCompatActivity {
+    // UI elements
     TextView tvHeader;
     ListView lvDetails;
+
+    // List adapter
     SimpleAdapter adapter;
 
     @Override
@@ -27,16 +34,20 @@ public class BookingDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_detail);
 
+        // Setup UI
         tvHeader = findViewById(R.id.tvHeader);
         lvDetails = findViewById(R.id.lvDetails);
 
+        // Get the booking info from booking activity
         Booking booking = (Booking)getIntent().getSerializableExtra("booking");
 
         tvHeader.setText("Details - " + (int)booking.getTravelerCount() + " traveler(s)");
 
+        // Data elements for the list adapter layout
         ArrayList<HashMap<String, String>> data = new ArrayList<>();
         NumberFormat dollarFormat = NumberFormat.getCurrencyInstance(new Locale("en", "CA"));
 
+        // Load the list data into a map
         Arrays.stream(booking.getBookingDetails()).forEach(details -> {
             HashMap<String, String> map = new HashMap<>();
             map.put("destination", "Trip to " + details.getDestination());
@@ -47,6 +58,7 @@ public class BookingDetailActivity extends AppCompatActivity {
             data.add(map);
         });
 
+        // Load data into the adapter
         String[] from = {
                 "destination", "description", "tripStart", "tripEnd", "basePrice"
         };

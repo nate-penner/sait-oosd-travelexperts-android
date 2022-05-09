@@ -4,6 +4,10 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
+/**
+ * Data class representing a customer booking record
+ * @author Nate Penner
+ * */
 public class Customer implements Serializable {
     private int customerId;
     private String firstName, lastName;

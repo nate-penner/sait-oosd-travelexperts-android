@@ -13,6 +13,11 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Objects;
 
+/**
+ * @deprecated This is deprecated but the code remains for reference only, and is referred to by
+ * {@link DataSource}, which is also deprecated, but still in use
+ * @author Nate Penner
+ * */
 public class DBHelper extends SQLiteOpenHelper {
     private static final String NAME = "TravelExpertsSqlLite.db";
     private static final int VERSION = 1;

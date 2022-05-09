@@ -11,12 +11,20 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * APIRequest simplifies the process of making an HTTP request to an API endpoint, allowing you
+ * to easily send and receive string data
+ * @author Nate Penner
+ * */
 public class APIRequest {
-    private String endPoint;
-    private String path;
-    private String method;
-    private String requestMimeType, responseMimeType;
+    private final String endPoint;    // The endpoint (without a trailing /)
+    private final String path;        // The route to the API endpoint
+    private final String method;      // The HTTP request method
 
+    // The mime types for the request and response data (eg. text/plain, application/json)
+    private final String requestMimeType, responseMimeType;
+
+    // Constructor
     public APIRequest(String endPoint, String path, String method, String requestMimeType, String responseMimeType) {
         this.endPoint = endPoint;
         this.path = path;
@@ -25,15 +33,25 @@ public class APIRequest {
         this.responseMimeType = responseMimeType;
     }
 
+    /**
+     * Send the request
+     * @return The response, as a string (accepted as responseMimeType)
+     * */
     public String send() {
         return send(null);
     }
 
+    /**
+     * Send the request, and some data along with it
+     * @param data The data to send, as a string. This data should be of type requestMimeType
+     * @return The string response (accepted as responseMimeType), or null if an error occurs, or null
+     * if the response code is anything other than 200 OK
+     * */
     public String send(String data) {
         String response = null;
         try {
             URL url = new URL(endPoint+path);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.setRequestMethod(method);
             conn.setRequestProperty("Accept", responseMimeType);
 
@@ -74,45 +92,5 @@ public class APIRequest {
         }
 
         return response;
-    }
-
-    public String getEndPoint() {
-        return endPoint;
-    }
-
-    public void setEndPoint(String endPoint) {
-        this.endPoint = endPoint;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
-    }
-
-    public String getRequestMimeType() {
-        return requestMimeType;
-    }
-
-    public void setRequestMimeType(String requestMimeType) {
-        this.requestMimeType = requestMimeType;
-    }
-
-    public String getResponseMimeType() {
-        return responseMimeType;
-    }
-
-    public void setResponseMimeType(String responseMimeType) {
-        this.responseMimeType = responseMimeType;
     }
 }

@@ -19,6 +19,11 @@ import oosd.sait.travelexperts.data.Customer;
 import oosd.sait.travelexperts.data.CustomerResource;
 import oosd.sait.travelexperts.data.DataSource;
 
+/**
+ * Customer activity. Displays a list of customers that can be clicked for more info, and a button
+ * to add a new customer
+ * @author Nate Penner
+ * */
 public class CustomersActivity extends AppCompatActivity {
     ListView lvCustomers;
     Button btnAddCustomer;

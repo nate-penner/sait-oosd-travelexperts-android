@@ -23,12 +23,19 @@ import oosd.sait.travelexperts.data.DataSource;
 import oosd.sait.travelexperts.data.Package;
 import oosd.sait.travelexperts.data.PackageResource;
 
+/**
+ * Package detail activity. Displays information about a vacation package that can be clicked for
+ * more info, and a button to add a new package
+ * @author Nate Penner
+ * */
 public class PackageDetailActivity extends AppCompatActivity {
+    // UI elements
     EditText etId, etName, etStartDate, etEndDate, etDescription, etBasePrice,
              etAgencyCommission;
     TextView tvHeader;
     Button btnSave, btnDelete, btnAddEditProducts;
-//    Date selectedStartDate, selectedEndDate;
+
+    // Data variables
     DataSource<Package, Integer> dataSource;
     Package pkg;
 
@@ -101,19 +108,21 @@ public class PackageDetailActivity extends AppCompatActivity {
             // Edit a package
             int packageId = getIntent().getIntExtra("packageId", 0);
 
+            // Save button click handler
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    saveForm();
+                    saveForm(); // Saves the data entered into the pkg object
 
-                    // TODO: Get products list from the products suppliers activity
-
+                    // Update the package data
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
+                            // Perform network activity on a different thread
                             int result = dataSource.update(pkg);
                             Log.d("nate", "result: " + result);
 
+                            // Show status messages on the main thread
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -133,14 +142,18 @@ public class PackageDetailActivity extends AppCompatActivity {
                 }
             });
 
+            // Delete button click handler
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    // Delete the package
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
+                            // Perform the network activity on a different thread
                             int result = dataSource.deleteById(packageId);
 
+                            // Show the status of the deletion on the UI thread
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -160,11 +173,14 @@ public class PackageDetailActivity extends AppCompatActivity {
                 }
             });
 
+            // Load the package data from the database
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    // Do the network work on a different thread
                     pkg = dataSource.getById(packageId);
 
+                    // Update the UI with the package data on the main thread
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -183,6 +199,9 @@ public class PackageDetailActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Saves the data from UI into the pkg object
+     * */
     public void saveForm() {
         int id;
         double basePrice, agencyCommission;
@@ -217,6 +236,9 @@ public class PackageDetailActivity extends AppCompatActivity {
         );
     }
 
+    /**
+     * Set up the date selection UI dialogs for picking package start date and end date
+     * */
     public void setupDateDialogs() {
         etStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -247,10 +269,16 @@ public class PackageDetailActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Display the datepicker dialog
+     * @param trigger The text box that was clicked to trigger this method
+     * @param whichDate A string specifying whether this is the start or end date
+     * */
     public void showDatePicker(EditText trigger, String whichDate) {
         Calendar calendar = Calendar.getInstance();
         EditText dateSrc;
 
+        // Parse the date from the dateSrc edittext
         if (whichDate.equalsIgnoreCase("startDate"))
             dateSrc = etStartDate;
         else
@@ -268,11 +296,13 @@ public class PackageDetailActivity extends AppCompatActivity {
             nowDay = date.getDayOfMonth();
         }
 
+        // Show the date picker with the parsed date selected
         DatePickerDialog datePicker = new DatePickerDialog(
                 PackageDetailActivity.this,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        // Update the edit text with the selected date
                         trigger.setText(String.format(Locale.US, "%d-%02d-%02d", year, month+1, day));
                         Calendar c = Calendar.getInstance();
                         c.set(year, month, day);

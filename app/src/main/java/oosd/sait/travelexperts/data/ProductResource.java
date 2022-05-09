@@ -21,7 +21,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-
+/**
+ * A data source for obtaining product information from an API, which implements {@link DataResource}
+ * (see for documentation of interface methods)
+ * @see Product for information about the type of data used by this resource
+ * @apiNote Only methods used so far in this project are implemented
+ * @author Nate Penner
+ * */
 public class ProductResource implements DataResource<Product, Integer> {
     @Override
     public int insert(Product data) {

@@ -5,6 +5,10 @@ import androidx.annotation.NonNull;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Data class representing a customer booking record
+ * @author Nate Penner
+ * */
 public class Booking implements Serializable {
     private int id;
     private String bookingDate, bookingNo;
@@ -19,6 +23,7 @@ public class Booking implements Serializable {
         this.bookingDetails = bookingDetails;
     }
 
+    // Getters and setters
     public int getId() {
         return id;
     }
@@ -59,6 +64,7 @@ public class Booking implements Serializable {
         this.bookingDetails = bookingDetails;
     }
 
+    // Override toString to show the booking number
     @NonNull
     @Override
     public String toString() {

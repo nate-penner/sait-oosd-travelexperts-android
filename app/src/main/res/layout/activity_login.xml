@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:ems="10"
-            android:hint="Company Email"
+            android:hint="Company Login"
             android:inputType="textEmailAddress"
             android:paddingVertical="15dp" />
 

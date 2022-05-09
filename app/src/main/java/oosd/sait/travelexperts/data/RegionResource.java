@@ -12,6 +12,13 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * A data source for obtaining region information from an API, which implements {@link DataResource}
+ * (see for documentation of interface methods)
+ * @see Province for information about the type of data used by this resource
+ * @apiNote Only methods used so far in this project are implemented
+ * @author Nate Penner
+ * */
 public class RegionResource extends DataSource<Province, Integer> {
 
     public RegionResource(Context context) {
